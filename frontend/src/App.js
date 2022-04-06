@@ -9,6 +9,7 @@ import './App.css';
 import Playlists from './Components/Playlists/Playlists';
 import Header from './Components/Header/Header';
 import Footer from './Components/Footer/Footer';
+import { GlobalStyle } from './styles/GlobalStyle';
 
 export const AppContext = createContext();
 
@@ -150,15 +151,18 @@ function App() {
   },[])
 
   return (
-    <AppContext.Provider value={datas}>
-      <Router>
-        <Header/>
-        <Routes>
-          <Route path='/' element={<Playlists/>}/>
-        </Routes>
-        <Footer/>
-      </Router>
-    </AppContext.Provider>
+    <React.Fragment>
+      <GlobalStyle/>
+        <AppContext.Provider value={datas}>
+          <Router>
+          <Header/>
+          <Routes>
+            <Route path='/' element={<Playlists/>}/>
+          </Routes>
+          <Footer/>
+        </Router>
+        </AppContext.Provider>
+    </React.Fragment>
   );
 }
 
