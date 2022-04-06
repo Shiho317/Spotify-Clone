@@ -10,8 +10,6 @@ import Playlists from './Components/Playlists/Playlists';
 import Header from './Components/Header/Header';
 import Footer from './Components/Footer/Footer';
 import { GlobalStyle } from './styles/GlobalStyle';
-import { ThemeProvider } from 'styled-components';
-import { theme } from './styles/Theme.style';
 
 export const AppContext = createContext();
 
@@ -155,17 +153,15 @@ function App() {
   return (
     <React.Fragment>
       <GlobalStyle/>
-        <ThemeProvider theme={theme}>
-          <AppContext.Provider value={datas}>
-            <Router>
-              <Header/>
-              <Routes>
-                <Route path='/' element={<Playlists/>}/>
-              </Routes>
-              <Footer/>
-            </Router>
-          </AppContext.Provider>
-        </ThemeProvider>
+        <AppContext.Provider value={datas}>
+          <Router>
+          <Header/>
+          <Routes>
+            <Route path='/' element={<Playlists/>}/>
+          </Routes>
+          <Footer/>
+        </Router>
+        </AppContext.Provider>
     </React.Fragment>
   );
 }

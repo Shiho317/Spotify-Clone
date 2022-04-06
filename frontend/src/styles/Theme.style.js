@@ -10,10 +10,9 @@ const mediaSize = {
 
 export const theme = {
   color: {
-    black: '#000000',
-    lightblack: '#191414',
+    black: '#191414',
     green: '#1DB954',
-    white: '#ffffff',
+    white: '#000000',
     deepgrey: '#535353',
     lightgrey: '#B3B3B3',
   },
