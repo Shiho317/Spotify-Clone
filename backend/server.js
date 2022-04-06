@@ -1,5 +1,11 @@
-const express = require('express');
-const app = express();
+/* Load the HTTP library */
+var http = require("http");
 
-app.listen(4000, () => console.log('running successfully.'))
+/* Create an HTTP server to handle responses */
+
+http.createServer(function(request, response) {
+  response.writeHead(200, {"Content-Type": "text/plain"});
+  response.write("Hello World");
+  response.end();
+}).listen(8888);
 
