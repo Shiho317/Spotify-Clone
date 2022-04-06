@@ -4,7 +4,7 @@ import { FooterWrapper } from './Footer.style'
 const Footer = () => {
   return (
     <FooterWrapper>
-      <p>&copy;2022.ShihoN All rights reserved.ddd</p>
+      <p>&copy;2022.ShihoN All rights reserved.</p>
     </FooterWrapper>
   )
 }
