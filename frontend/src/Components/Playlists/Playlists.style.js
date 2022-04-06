@@ -69,6 +69,8 @@ export const PlayButton = styled.button`
 export const PlaySonglists = styled.div`
   width: 100%;
   margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
   
   & ul{
     display: grid;

@@ -156,7 +156,7 @@ function App() {
     <React.Fragment>
       <GlobalStyle/>
         <ThemeProvider theme={theme}>
-          <AppContext.Provider value={datas}>
+          <AppContext.Provider value={{datas}}>
             <Router>
               <Header/>
               <Routes>

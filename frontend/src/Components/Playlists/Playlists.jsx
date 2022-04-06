@@ -1,14 +1,37 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../App';
 import { AlbumCoverImg, HeaderTitleWrapper, PlayButton, PlaylistsContents, PlaylistsHeader, PlayListsWrapper, PlaySonglists } from './Playlists.style';
 import { AiOutlineClockCircle } from 'react-icons/ai';
 import sample from '../../assets/images/sample.jpeg';
 import { GrPlayFill } from 'react-icons/gr';
+import PlaylistDatas from './PlaylistDatas';
 
 const Playlists = () => {
 
-  const { data } = useContext(AppContext);
-  
+  const { datas } = useContext(AppContext);
+
+  const PlaylistItems = datas.tracks.items;
+  console.log(PlaylistItems);
+
+  const itemsDuration = PlaylistItems.map(item => {
+    return item.track.duration_ms
+  })
+
+  const [ durationTotal, setDurationTotal ] = useState('0');
+
+  const durationToMin = () => {
+    const total = itemsDuration.reduce((sum, num) => {
+      return sum + num;
+    }, 0);
+    const min = Math.floor(total / 60000);
+    const sec = ((total % 60000) / 1000).toFixed(0);
+    setDurationTotal(min + ' min ' + (sec < 10 ? "0" : "") + sec + " sec");
+  }
+
+  useEffect(() => {
+    durationToMin()
+  }, [datas])
+
   return (
     <PlayListsWrapper>
       <div>
@@ -20,9 +43,9 @@ const Playlists = () => {
             <img src={sample} alt='' />
           </AlbumCoverImg>
           <HeaderTitleWrapper>
-            <p>aaaaaa</p>
-            <h1>BBBBBBB</h1>
-            <p>user name : 8 songs, 28 min 35 sec</p>
+            <p>playlist</p>
+            <h1>{datas.name}</h1>
+            <p>{datas.owner.display_name} : {datas.tracks.total} songs, {durationTotal}</p>
           </HeaderTitleWrapper>
         </PlaylistsHeader>
         <PlaylistsContents>
@@ -47,6 +70,9 @@ const Playlists = () => {
                 </p>
               </li>
             </ul>
+            {PlaylistItems.map((item, index) => (
+              <PlaylistDatas key={index} item={item} index={index}/>
+            ))}
           </PlaySonglists>
         </PlaylistsContents>
       </div>
