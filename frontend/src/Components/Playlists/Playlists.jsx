@@ -1,17 +1,24 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../App';
-import { AlbumCoverImg, AlbumCoverImgs, HeaderTitleWrapper, PlayButton, PlaylistsContents, PlaylistsHeader, PlayListsWrapper, PlaySonglists } from './Playlists.style';
+import { 
+  AlbumCoverImg, 
+  AlbumCoverImgs, 
+  HeaderTitleWrapper, 
+  PlayButton, 
+  PlaylistsContents, 
+  PlaylistsHeader, 
+  PlayListsWrapper, 
+  PlaySonglists } from './Playlists.style';
 import { AiOutlineClockCircle } from 'react-icons/ai';
-import sample from '../../assets/images/sample.jpeg';
-import { GrPlayFill } from 'react-icons/gr';
+import { BsFillPlayCircleFill } from 'react-icons/bs';
 import PlaylistDatas from './PlaylistDatas';
+import AudioPlayer from './AudioPlayer';
 
 const Playlists = () => {
 
   const { datas } = useContext(AppContext);
 
   const PlaylistItems = datas.tracks.items;
-  console.log(PlaylistItems);
 
   const itemsDuration = PlaylistItems.map(item => {
     return item.track.duration_ms
@@ -32,7 +39,92 @@ const Playlists = () => {
     durationToMin()
   }, [datas])
 
+  const [ musicOn, setIsMusicOn ] = useState(false)
+  const [ isPlaying, setIsPlaying ] = useState(false);
+
+  const [ clickedSong, setClickedSong ] = useState({
+    added_at: "",
+    added_by: {
+      external_urls: {
+        spotify: "",
+      },
+      href: "",
+      id: "",
+      type: "",
+      uri: "",
+    },
+    is_local: false,
+    primary_color: null,
+    track: {
+      album: {
+        album_type: "",
+        artists: [{
+          external_urls: {
+            spotify: "",
+          },
+          href: "",
+          id: "",
+          name: "",
+          type: "",
+          uri: "",
+        }],
+        available_markets: [],
+        external_urls: {
+          spotify: "",
+        },
+        href: "",
+        id: "",
+        images: [{
+          height: 0,
+          url: "",
+          width: 0,
+        }],
+        name: "",
+        release_date: "",
+        release_date_precision: "",
+        total_tracks: null,
+        type: "",
+        uri: "",
+      },
+      artists: [{
+        external_urls: {
+          spotify: "",
+        },
+        href: "",
+        id: "",
+        name: "",
+        type: "",
+        uri: "",
+      }],
+      available_markets: [],
+      disc_number: null,
+      duration_ms: null,
+      episode: false,
+      explicit: false,
+      external_ids: {
+        isrc: "",
+      },
+      external_urls: {
+        spotify: "",
+      },
+      href: "",
+      id: "",
+      is_local: false,
+      name: "",
+      popularity: null,
+      preview_url: "",
+      track: true,
+      track_number: null,
+      type: "",
+      uri: "",
+    },
+    video_thumbnail: {
+      url: null,
+    }
+  })
+
   return (
+    <React.Fragment>
     <PlayListsWrapper>
       <div>
         <PlaylistsHeader>
@@ -57,7 +149,7 @@ const Playlists = () => {
         </PlaylistsHeader>
         <PlaylistsContents>
           <PlayButton>
-            <GrPlayFill/>
+            <BsFillPlayCircleFill/>
           </PlayButton>
           <PlaySonglists>
             <ul>
@@ -78,12 +170,25 @@ const Playlists = () => {
               </li>
             </ul>
             {PlaylistItems.map((item, index) => (
-              <PlaylistDatas key={index} item={item} index={index}/>
+              <PlaylistDatas 
+                key={index} 
+                item={item} 
+                index={index} 
+                setClickedSong={setClickedSong} 
+                musicOn={musicOn} 
+                setIsMusicOn={setIsMusicOn}/>
             ))}
           </PlaySonglists>
         </PlaylistsContents>
       </div>
     </PlayListsWrapper>
+    <AudioPlayer 
+        isPlaying={isPlaying} 
+        setIsPlaying={setIsPlaying} 
+        clickedSong={clickedSong}
+        musicOn={musicOn} 
+    />
+    </React.Fragment>
   )
 }
 

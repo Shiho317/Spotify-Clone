@@ -1,9 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import { SongDetails, SongDetailsWrapper } from './PlaylistDatas.style';
-import { ImPlay3 } from 'react-icons/im';
-import { IoMdPause } from 'react-icons/io';
+import { MdMusicNote, MdMusicOff } from 'react-icons/md';
 
-const PlaylistDatas = ({ item, index }) => {
+const PlaylistDatas = ({ item, index, setClickedSong, musicOn, setIsMusicOn }) => {
 
   const artists = item.track.album.artists.map(artist => {
       return artist
@@ -37,21 +36,19 @@ const PlaylistDatas = ({ item, index }) => {
 
   const isHoverOn = useCallback(() => {
     setIsOnHover(prev => !prev)
-    console.log(isOnHover)
-  },[]);
-
-  const [ isMusicOn, setIsMusicOn ] = useState(false);
+  },[setIsOnHover]);
 
   const musicToggle = useCallback(() => {
     setIsMusicOn(prev => !prev)
-  }, [])
+    setClickedSong(item)
+  }, [item,setClickedSong, setIsMusicOn])
 
   return (
     <SongDetailsWrapper onMouseOver={isHoverOn} onMouseOut={isHoverOn}>
       <li>
         {isOnHover ? (
           <p className='index-play'>
-            {isMusicOn ? <IoMdPause onClick={musicToggle}/> : <ImPlay3 onClick={musicToggle}/>}
+            {musicOn ? <MdMusicOff onClick={musicToggle}/> : <MdMusicNote onClick={musicToggle}/>}
           </p>
         ) : (
           <p className='index-play'>
@@ -67,7 +64,7 @@ const PlaylistDatas = ({ item, index }) => {
           </h4>
           <p>
             {artists.map((artist, index) => (
-              <a href={artist.external_urls.spotify} target="_blank" rel="noopener noreferrer">
+              <a key={artist.name} href={artist.external_urls.spotify} target="_blank" rel="noopener noreferrer">
                 {artist.name} {artists.length > 1 && index !== artists.length - 1 ? ', ' : ''}
               </a>
             ))}
