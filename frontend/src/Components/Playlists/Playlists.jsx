@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../App';
-import { AlbumCoverImg, HeaderTitleWrapper, PlayButton, PlaylistsContents, PlaylistsHeader, PlayListsWrapper, PlaySonglists } from './Playlists.style';
+import { AlbumCoverImg, AlbumCoverImgs, HeaderTitleWrapper, PlayButton, PlaylistsContents, PlaylistsHeader, PlayListsWrapper, PlaySonglists } from './Playlists.style';
 import { AiOutlineClockCircle } from 'react-icons/ai';
 import sample from '../../assets/images/sample.jpeg';
 import { GrPlayFill } from 'react-icons/gr';
@@ -36,12 +36,19 @@ const Playlists = () => {
     <PlayListsWrapper>
       <div>
         <PlaylistsHeader>
-          <AlbumCoverImg>
-            <img src={sample} alt='' />
-            <img src={sample} alt='' />
-            <img src={sample} alt='' />
-            <img src={sample} alt='' />
-          </AlbumCoverImg>
+          {PlaylistItems.length >= 4 ? (
+            <AlbumCoverImgs>
+              <img src={PlaylistItems[2].track.album.images[0].url} alt='header-cover1'/>
+              <img src={PlaylistItems[0].track.album.images[0].url} alt='header-cover1'/>
+              <img src={PlaylistItems[1].track.album.images[0].url} alt='header-cover1'/>
+              <img src={PlaylistItems[3].track.album.images[0].url} alt='header-cover1'/>
+            </AlbumCoverImgs>
+          ): (
+            <AlbumCoverImg>
+              <img src={PlaylistItems[0].track.album.images[0].url} alt='header-cover1'/>
+            </AlbumCoverImg>
+          )}
+          
           <HeaderTitleWrapper>
             <p>playlist</p>
             <h1>{datas.name}</h1>

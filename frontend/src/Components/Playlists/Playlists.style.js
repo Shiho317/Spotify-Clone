@@ -19,17 +19,31 @@ export const PlaylistsHeader = styled.div`
   padding: 0 2rem;
 `
 
-export const AlbumCoverImg = styled.div`
+export const AlbumCoverImgs = styled.div`
   width: 15rem;
   height: 15rem;
   background: red;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
+
   & img{
     width: 100%;
     height: 100%;
   }
+`
+
+export const AlbumCoverImg = styled.div`
+  width: 15rem;
+  height: 15rem;
+  background: red;
+  display: grid;
+
+& img{
+  width: 100%;
+  height: 100%;
+  background: grey;
+}
 `
 
 export const HeaderTitleWrapper = styled.div`
