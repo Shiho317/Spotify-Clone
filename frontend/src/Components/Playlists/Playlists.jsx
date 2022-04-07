@@ -10,7 +10,7 @@ import {
   PlayListsWrapper, 
   PlaySonglists } from './Playlists.style';
 import { AiOutlineClockCircle } from 'react-icons/ai';
-import { BsFillPlayCircleFill } from 'react-icons/bs';
+import { BsFillPlayCircleFill, BsPauseCircleFill } from 'react-icons/bs';
 import PlaylistDatas from './PlaylistDatas';
 import AudioPlayer from './AudioPlayer';
 
@@ -41,6 +41,10 @@ const Playlists = () => {
 
   const [ musicOn, setIsMusicOn ] = useState(false)
   const [ isPlaying, setIsPlaying ] = useState(false);
+
+  const playButtonClick = () => {
+    setIsPlaying(prev => !prev)
+  }
 
   const [ clickedSong, setClickedSong ] = useState({
     added_at: "",
@@ -148,8 +152,12 @@ const Playlists = () => {
           </HeaderTitleWrapper>
         </PlaylistsHeader>
         <PlaylistsContents>
-          <PlayButton>
-            <BsFillPlayCircleFill/>
+          <PlayButton onClick={() => playButtonClick()}>
+            {isPlaying ? 
+              <BsPauseCircleFill/>
+              :
+              <BsFillPlayCircleFill/>
+            }
           </PlayButton>
           <PlaySonglists>
             <ul>
