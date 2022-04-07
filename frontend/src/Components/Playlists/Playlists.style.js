@@ -19,17 +19,33 @@ export const PlaylistsHeader = styled.div`
   padding: 0 2rem;
 `
 
-export const AlbumCoverImg = styled.div`
+export const AlbumCoverImgs = styled.div`
   width: 15rem;
   height: 15rem;
   background: red;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
+  box-shadow: 0 0 3rem rgba(0, 0, 0, 0.5);
+
   & img{
     width: 100%;
     height: 100%;
   }
+`
+
+export const AlbumCoverImg = styled.div`
+  width: 15rem;
+  height: 15rem;
+  background: red;
+  display: grid;
+  box-shadow: 0 0 3rem rgba(0, 0, 0, 0.5);
+
+& img{
+  width: 100%;
+  height: 100%;
+  background: grey;
+}
 `
 
 export const HeaderTitleWrapper = styled.div`
@@ -56,19 +72,28 @@ export const PlaylistsContents = styled.div`
 export const PlayButton = styled.button`
   width: 3.5rem;
   height: 3.5rem;
-  background: ${props => props.theme.color.green};
+  background: black;
   border-radius: 50%;
   border: none;
-  font-size: 1.3rem;
+  font-size: 3.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  color: ${props => props.theme.color.green};
+
+  &:hover {
+    color: ${props => props.theme.color.lightgreen};
+    transform: scale(1.1);
+    transition: all 0.2s ease;
+  }
 `
 
 export const PlaySonglists = styled.div`
   width: 100%;
   margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
   
   & ul{
     display: grid;
