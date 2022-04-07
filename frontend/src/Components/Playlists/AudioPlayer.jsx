@@ -90,7 +90,7 @@ const AudioPlayer = ({
   });
 
   return (
-    <AudioPlayerWrapper style={{bottom: musicOn ? '0' : '-6rem'}}>
+    <AudioPlayerWrapper style={{display: musicOn ? 'grid' : 'none'}}>
       <AudioDetails>
         <img src={clickedSong.track.album.images[0].url} alt='audio-cover' />
         <div>

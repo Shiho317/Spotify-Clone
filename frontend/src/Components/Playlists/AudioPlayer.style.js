@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const AudioPlayerWrapper = styled.div`
 position: absolute;
+bottom: 0;
 z-index: 99;
-display: grid;
 grid-template-columns: 3fr 4fr 3fr;
 align-itemsL center;
 height: 6rem;
