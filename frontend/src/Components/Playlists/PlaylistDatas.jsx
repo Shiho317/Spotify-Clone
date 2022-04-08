@@ -77,7 +77,11 @@ const PlaylistDatas = ({ item, index, setClickedSong, musicOn, setIsMusicOn }) =
         </a>
       </li>
       <li>
-        <p>{diffDays} {diffDays === 1 ? 'day' : 'days'} ago</p>
+        {diffDays === -1 ? (
+          <p>today</p>
+        ) : (
+          <p>{diffDays} {diffDays === 1 ? 'day' : 'days'} ago</p>
+        )}
       </li>
       <li>
         <p>

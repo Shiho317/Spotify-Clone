@@ -1,13 +1,24 @@
 import styled from "styled-components";
 
 export const HeaderWrapper = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
-  left: 0;
   background: ${props => props.theme.color.black};
-  width: 17%;
+  width: 70%;
   height: 100vh;
   padding: 1.5rem;
+  z-index: 99;
+
+  .close-button {
+    position: absolute;
+    top: 1rem;
+    transition: all 0.5s ease;
+  }
+
+  @media ${props => props.theme.device.laptop} {
+    width: 17%;
+    height: 100vh;
+  }
 `
 
 export const LogoWrapper = styled.div`
@@ -23,6 +34,7 @@ export const NavigationsWrapper = styled.nav`
   gap: 2rem;
   padding: 1rem 0;
   border-bottom: 1px solid ${props => props.theme.color.lightgrey};
+
   & ul{
     display: flex;
     flex-direction: column;
