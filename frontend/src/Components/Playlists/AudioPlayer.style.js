@@ -1,17 +1,23 @@
 import styled from "styled-components";
 
 export const AudioPlayerWrapper = styled.div`
-position: absolute;
-bottom: 0;
-z-index: 99;
-grid-template-columns: 3fr 4fr 3fr;
-align-itemsL center;
-height: 6rem;
-width: 100%;
-padding: 0.8rem;
-background: ${props => props.theme.color.lightblack};
-border-top: 1px solid ${props => props.theme.color.deepgrey};
-transition: all 0.3s ease;
+  position: absolute;
+  bottom: 0;
+  z-index: 99;
+  grid-template-rows: 2fr 1fr 1fr;
+  align-items: center;
+  height: 40vh;
+  width: 100%;
+  padding: 0.8rem;
+  background: ${props => props.theme.color.lightblack};
+  border-top: 1px solid ${props => props.theme.color.deepgrey};
+  transition: all 0.3s ease;
+
+  @media ${props => props.theme.device.laptop} {
+    height: 6rem;
+    grid-template-rows: 1fr;
+    grid-template-columns: 3fr 4fr 3fr;
+  }
 `
 
 export const AudioDetails = styled.div`
@@ -219,6 +225,24 @@ export const AudioFavButton = styled.div`
 
     &:hover{
       color: ${props => props.theme.color.white};
+    }
+  }
+`
+
+export const BigCoverImg = styled.div`
+  position: absolute;
+  bottom: 40vh;
+  left: 0;
+
+  @media ${props => props.theme.device.laptop} {
+    bottom: 6rem;
+  }
+
+  & img{
+    width: 10rem;
+
+    @media ${props => props.theme.device.laptop} {
+      width: 15rem;
     }
   }
 `

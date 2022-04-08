@@ -5,7 +5,8 @@ import {
   AudioFavButton, 
   AudioMan, 
   AudioPlayerWrapper, 
-  AudioProgress } from './AudioPlayer.style';
+  AudioProgress, 
+  BigCoverImg} from './AudioPlayer.style';
 import { IoIosSkipForward, IoIosSkipBackward } from 'react-icons/io';
 import { BsPlayCircleFill, BsPauseCircleFill } from 'react-icons/bs';
 import { FaRegHeart, FaHeart } from 'react-icons/fa';
@@ -69,13 +70,13 @@ const AudioPlayer = ({
 		changeCurrentTime();
 	};
 
-  const backThirty = () => {
-		progressRef.current.value = Number(progressRef.current.value) - 30;
+  const backTen = () => {
+		progressRef.current.value = Number(progressRef.current.value) - 10;
 		changeRange();
 	};
 
-  const forwardThirty = () => {
-		progressRef.current.value = Number(progressRef.current.value) + 30;
+  const forwardTen = () => {
+		progressRef.current.value = Number(progressRef.current.value) + 10;
 		changeRange();
 	};
 
@@ -88,6 +89,12 @@ const AudioPlayer = ({
   const artistName = clickedSong.track.album.artists.map(artist => {
     return artist
   });
+
+  const [ showBgImg, setShowBgImg ] = useState(false);
+
+  const showImage = () => {
+    setShowBgImg(prev => !prev);
+  };
 
   return (
     <AudioPlayerWrapper style={{display: musicOn ? 'grid' : 'none'}}>
@@ -109,7 +116,7 @@ const AudioPlayer = ({
           preload='metadata'
           onLoadedMetadata={onLoadedMeta}/>
         <AudioMan>
-          <button className='back' onClick={backThirty}>
+          <button className='back' onClick={backTen}>
             <IoIosSkipBackward/>
           </button>
           <button className='play' onClick={togglePause}>
@@ -119,7 +126,7 @@ const AudioPlayer = ({
               <BsPlayCircleFill/>
             }
           </button>
-          <button className='forward' onClick={forwardThirty}>
+          <button className='forward' onClick={forwardTen}>
             <IoIosSkipForward/>
           </button>
         </AudioMan>
@@ -142,10 +149,15 @@ const AudioPlayer = ({
             <FaRegHeart/>
           }
         </button>
-        <button>
+        <button onClick={showImage}>
           <GoScreenFull/>
         </button>
       </AudioFavButton>
+      {showBgImg && (
+        <BigCoverImg>
+          <img src={clickedSong.track.album.images[0].url} alt='big-img'/>
+        </BigCoverImg>
+      )}
     </AudioPlayerWrapper>
   )
 }

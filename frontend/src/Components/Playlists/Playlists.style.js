@@ -4,9 +4,13 @@ export const PlayListsWrapper = styled.div`
   position: absolute;
   top: 0;
   right: 0;
-  width: 83%;
+  width: 100%;
   height: 100vh;
   overflow: scroll;
+
+  @media ${props => props.theme.device.laptop} {
+    width: 83%;
+  }
 `
 
 export const PlaylistsHeader = styled.div`
@@ -14,14 +18,20 @@ export const PlaylistsHeader = styled.div`
   height: 40vh;
   background: linear-gradient(to bottom, #DCDCDC, #696969);
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   gap: 1rem;
   padding: 0 2rem;
+
+  @media ${props => props.theme.device.laptop} {
+    flex-direction: row;
+  }
 `
 
 export const AlbumCoverImgs = styled.div`
-  width: 15rem;
-  height: 15rem;
+  width: 10rem;
+  height: 10rem;
   background: red;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -32,11 +42,16 @@ export const AlbumCoverImgs = styled.div`
     width: 100%;
     height: 100%;
   }
+
+  @media ${props => props.theme.device.laptop} {
+    width: 15rem;
+    height: 15rem;
+  }
 `
 
 export const AlbumCoverImg = styled.div`
-  width: 15rem;
-  height: 15rem;
+  width: 10rem;
+  height: 10rem;
   background: red;
   display: grid;
   box-shadow: 0 0 3rem rgba(0, 0, 0, 0.5);
@@ -46,19 +61,37 @@ export const AlbumCoverImg = styled.div`
   height: 100%;
   background: grey;
 }
+
+@media ${props => props.theme.device.laptop} {
+  width: 15rem;
+  height: 15rem;
+}
 `
 
 export const HeaderTitleWrapper = styled.div`
-  height: 15rem;
+  height: unset;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   color: ${props => props.theme.color.white};
+
+  @media ${props => props.theme.device.laptop} {
+    height: 15rem;
+  }
+
   & h1{
-    font-size: 4rem;
+    font-size: 1.5rem;
+
+    @media ${props => props.theme.device.laptop} {
+      font-size: 4rem;
+    }
   }
   & p{
-    font-size: 1rem;
+    font-size: 0.8rem;
+
+    @media ${props => props.theme.device.laptop} {
+      font-size: 1rem;
+    }
   }
 `
 
@@ -67,6 +100,7 @@ export const PlaylistsContents = styled.div`
   height: 100%;
   padding: 2rem;
   background: linear-gradient(to bottom, ${props => props.theme.color.deepgrey}, ${props => props.theme.color.lightblack});
+  overflow: scroll;
 `
 
 export const PlayButton = styled.button`
@@ -90,10 +124,14 @@ export const PlayButton = styled.button`
 `
 
 export const PlaySonglists = styled.div`
-  width: 100%;
+  width: 300%;
   margin-top: 2rem;
   display: flex;
   flex-direction: column;
+
+  @media ${props => props.theme.device.laptop} {
+    width: 100%;
+  }
   
   & ul{
     display: grid;
