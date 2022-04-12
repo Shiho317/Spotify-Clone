@@ -76,10 +76,18 @@ app.post('/refresh', (req, res) => {
 
 app.post('/playlist', (req, res) => {
   const playlistId = req.body.playlistId;
-  const spotifyApi = new SpotifyWebApi();
+  const accessToken = req.body.code;
+  const spotifyApi = new SpotifyWebApi({
+    redirectUri: process.env.REDIRECT_URI,
+    clientId: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+  });
+  spotifyApi.setAccessToken(accessToken)
   spotifyApi.getPlaylist(playlistId)
   .then(data => {
     res.json({
+      accessToken: data.body.access_token,
+      expiresIn: data.body.expires_in,
       playlist: data.body
     })
   })

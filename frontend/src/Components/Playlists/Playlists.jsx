@@ -34,6 +34,7 @@ const Playlists = () => {
   useEffect(() => {
     axios.post('http://localhost:8888/playlist', {
       playlistId,
+      code
     })
     .then(res => {
       setDatas(res.data.playlist)
@@ -41,7 +42,7 @@ const Playlists = () => {
     .catch((err) => {
       console.log(err)
     })
-  }, [datas])
+  }, [setDatas, playlistId, code])
 
   const PlaylistItems = datas.tracks.items;
 
