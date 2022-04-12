@@ -7,11 +7,10 @@ import {
 import axios from 'axios';
 import './App.css';
 import Playlists from './Components/Playlists/Playlists';
-import Header from './Components/Header/Header';
-import Footer from './Components/Footer/Footer';
 import { GlobalStyle } from './styles/GlobalStyle';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './styles/Theme.style';
+import Login from './Components/Login/Login';
 
 export const AppContext = createContext();
 
@@ -152,17 +151,17 @@ function App() {
     getPlaylist();
   },[])
 
+  const code = new URLSearchParams(window.location.search).get("code")
+
   return (
     <React.Fragment>
       <GlobalStyle/>
         <ThemeProvider theme={theme}>
-          <AppContext.Provider value={{datas}}>
+          <AppContext.Provider value={{datas, code}}>
             <Router>
-              <Header/>
               <Routes>
-                <Route path='/' element={<Playlists/>}/>
+                <Route path='/' element={code ? <Playlists/> : <Login/>}/>
               </Routes>
-              <Footer/>
             </Router>
           </AppContext.Provider>
         </ThemeProvider>

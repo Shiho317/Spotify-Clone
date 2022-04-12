@@ -13,10 +13,20 @@ import { AiOutlineClockCircle } from 'react-icons/ai';
 import { BsFillPlayCircleFill, BsPauseCircleFill } from 'react-icons/bs';
 import PlaylistDatas from './PlaylistDatas';
 import AudioPlayer from './AudioPlayer';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+import Auth from '../Auth/Auth';
+import SpotifyWebApi from 'spotify-web-api-node';
 
 const Playlists = () => {
 
-  const { datas } = useContext(AppContext);
+  // const spotifyApi = new SpotifyWebApi({
+  //   clientId: process.env.REACT_APP_CLIENT_ID
+  // })
+
+  const { datas, code } = useContext(AppContext);
+  console.log(code);
+  // const accessToken = Auth(code);
 
   const PlaylistItems = datas.tracks.items;
 
@@ -37,7 +47,13 @@ const Playlists = () => {
 
   useEffect(() => {
     durationToMin()
-  }, [datas])
+  }, [datas]);
+
+  // useEffect(() => {
+  //   if(!accessToken){
+  //     spotifyApi.setAccessToken(accessToken);
+  //   }
+  // },[accessToken])
 
   const [ musicOn, setIsMusicOn ] = useState(false)
   const [ isPlaying, setIsPlaying ] = useState(false);
@@ -129,6 +145,7 @@ const Playlists = () => {
 
   return (
     <React.Fragment>
+    <Header/>
     <PlayListsWrapper>
       <div>
         <PlaylistsHeader>
@@ -196,6 +213,7 @@ const Playlists = () => {
         clickedSong={clickedSong}
         musicOn={musicOn} 
     />
+    <Footer/>
     </React.Fragment>
   )
 }
