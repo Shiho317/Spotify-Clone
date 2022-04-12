@@ -71,6 +71,24 @@ app.post('/refresh', (req, res) => {
   })
 })
 
+
+//get a playlist
+
+app.post('/playlist', (req, res) => {
+  const playlistId = req.body.playlistId;
+  const spotifyApi = new SpotifyWebApi();
+  spotifyApi.getPlaylist(playlistId)
+  .then(data => {
+    res.json({
+      playlist: data.body
+    })
+  })
+  .catch(err => {
+    console.log(err);
+    res.sendStatus(400);
+  })
+})
+
 app.listen(8888, () => console.log('server is listening.'))
 
 

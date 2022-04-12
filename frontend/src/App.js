@@ -132,10 +132,12 @@ function App() {
     }
   });
 
+  const code = new URLSearchParams(window.location.search).get("code")
+
   const getPlaylist = () => {
     axios.get(`https://api.spotify.com/v1/users/${process.env.REACT_APP_USER_ID}/playlists/${process.env.REACT_APP_PLAYLIST_ID}`, {
       headers: {
-              "Authorization": `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`,
+              "Authorization": `Bearer ${code}`,
             },
     })
     .then((res) => {
@@ -147,17 +149,11 @@ function App() {
     })
   }
 
-  useEffect(() => {
-    getPlaylist();
-  },[])
-
-  const code = new URLSearchParams(window.location.search).get("code")
-
   return (
     <React.Fragment>
       <GlobalStyle/>
         <ThemeProvider theme={theme}>
-          <AppContext.Provider value={{datas, code}}>
+          <AppContext.Provider value={{datas, setDatas, code}}>
             <Router>
               <Routes>
                 <Route path='/' element={code ? <Playlists/> : <Login/>}/>

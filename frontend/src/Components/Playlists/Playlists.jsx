@@ -17,6 +17,7 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Auth from '../Auth/Auth';
 import SpotifyWebApi from 'spotify-web-api-node';
+import axios from 'axios';
 
 const Playlists = () => {
 
@@ -24,9 +25,23 @@ const Playlists = () => {
   //   clientId: process.env.REACT_APP_CLIENT_ID
   // })
 
-  const { datas, code } = useContext(AppContext);
+  const { datas, setDatas, code } = useContext(AppContext);
   console.log(code);
   // const accessToken = Auth(code);
+
+  const playlistId = process.env.REACT_APP_PLAYLIST_ID;
+
+  useEffect(() => {
+    axios.post('http://localhost:8888/playlist', {
+      playlistId,
+    })
+    .then(res => {
+      setDatas(res.data.playlist)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }, [datas])
 
   const PlaylistItems = datas.tracks.items;
 
