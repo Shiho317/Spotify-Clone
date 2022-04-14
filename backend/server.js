@@ -4,7 +4,6 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const SpotifyWebApi = require('spotify-web-api-node');
-const axios = require('axios');
 
 dotenv.config();
 
