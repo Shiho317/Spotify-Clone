@@ -16,35 +16,150 @@ import AudioPlayer from './AudioPlayer';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Auth from '../Auth/Auth';
-import SpotifyWebApi from 'spotify-web-api-node';
 import axios from 'axios';
 
 const Playlists = () => {
 
-  // const spotifyApi = new SpotifyWebApi({
-  //   clientId: process.env.REACT_APP_CLIENT_ID
-  // })
+  const { code } = useContext(AppContext);
+  const accessToken = Auth(code);
 
-  const { datas, setDatas, code } = useContext(AppContext);
-  console.log(code);
-  // const accessToken = Auth(code);
+  const [ datas, setDatas ] = useState({
+    collaborative: false,
+    description: "",
+    external_urls: {
+      spotify: "",
+    },
+    followers: {
+      href: null,
+      total: 0,
+    },
+    href: "",
+    id: "",
+    images: [{
+      height: 0,
+      url: "",
+      width: 0,
+    }],
+    name: "",
+    owner: {
+      display_name: "",
+      external_urls: {
+        spotify: ""
+      },
+      href: "",
+      id: "",
+      type: "",
+      uri: "",
+    },
+    primary_color: "",
+    public: false,
+    snapshot_id: "",
+    tracks: {
+      href: "",
+      items: [{
+        added_at: "",
+        added_by: {
+          external_urls: {
+            spotify: "",
+          },
+          href: "",
+          id: "",
+          type: "",
+          uri: "",
+        },
+        is_local: false,
+        primary_color: null,
+        track: {
+          album: {
+            album_type: "",
+            artists: [{
+              external_urls: {
+                spotify: "",
+              },
+              href: "",
+              id: "",
+              name: "",
+              type: "",
+              uri: "",
+            }],
+            available_markets: [],
+            external_urls: {
+              spotify: "",
+            },
+            href: "",
+            id: "",
+            images: [{
+              height: 0,
+              url: "",
+              width: 0,
+            }],
+            name: "",
+            release_date: "",
+            release_date_precision: "",
+            total_tracks: null,
+            type: "",
+            uri: "",
+          },
+          artists: [{
+            external_urls: {
+              spotify: "",
+            },
+            href: "",
+            id: "",
+            name: "",
+            type: "",
+            uri: "",
+          }],
+          available_markets: [],
+          disc_number: null,
+          duration_ms: null,
+          episode: false,
+          explicit: false,
+          external_ids: {
+            isrc: "",
+          },
+          external_urls: {
+            spotify: "",
+          },
+          href: "",
+          id: "",
+          is_local: false,
+          name: "",
+          popularity: null,
+          preview_url: "",
+          track: true,
+          track_number: null,
+          type: "",
+          uri: "",
+        },
+        video_thumbnail: {
+          url: null,
+        }
+      }]
+    }
+  });
 
   const playlistId = process.env.REACT_APP_PLAYLIST_ID;
 
+  const PlaylistItems = datas.tracks.items;
+
   useEffect(() => {
-    axios.post('http://localhost:8888/playlist', {
-      playlistId,
-      code
+    axios.get(`https://api.spotify.com/v1/playlists/${playlistId}`, {
+      headers: {
+        'ACCEPT': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
+      }
     })
     .then(res => {
-      setDatas(res.data.playlist)
+      setDatas(res.data)
     })
-    .catch((err) => {
+    .catch(err => {
       console.log(err)
     })
-  }, [setDatas, playlistId, code])
+  },[accessToken, playlistId])
 
-  const PlaylistItems = datas.tracks.items;
+  console.log(datas);
 
   const itemsDuration = PlaylistItems.map(item => {
     return item.track.duration_ms
@@ -64,12 +179,6 @@ const Playlists = () => {
   useEffect(() => {
     durationToMin()
   }, [datas]);
-
-  // useEffect(() => {
-  //   if(!accessToken){
-  //     spotifyApi.setAccessToken(accessToken);
-  //   }
-  // },[accessToken])
 
   const [ musicOn, setIsMusicOn ] = useState(false)
   const [ isPlaying, setIsPlaying ] = useState(false);

@@ -1,20 +1,10 @@
-// /* Load the HTTP library */
-// var http = require("http");
-
-// /* Create an HTTP server to handle responses */
-
-// http.createServer(function(request, response) {
-//   response.writeHead(200, {"Content-Type": "text/plain"});
-//   response.write("Hello World");
-//   response.end();
-// }).listen(8888);
-
 const express = require('express');
 const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const SpotifyWebApi = require('spotify-web-api-node');
+const axios = require('axios');
 
 dotenv.config();
 
@@ -46,7 +36,6 @@ app.post('/login', (req, res) => {
   })
 });
 
-
 //refresh token
 
 app.post('/refresh', (req, res) => {
@@ -71,32 +60,30 @@ app.post('/refresh', (req, res) => {
   })
 })
 
+//get new releases
 
-//get a playlist
-
-app.post('/playlist', (req, res) => {
-  const playlistId = req.body.playlistId;
-  const accessToken = req.body.code;
+app.post('/nreleases', async(req, res) => {
+  const country = req.body.country;
   const spotifyApi = new SpotifyWebApi({
     redirectUri: process.env.REDIRECT_URI,
     clientId: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
   });
-  spotifyApi.setAccessToken(accessToken)
-  spotifyApi.getPlaylist(playlistId)
+  spotifyApi.getNewReleases({
+    limit: 9,
+    offset: 0,
+    country
+  }) 
   .then(data => {
     res.json({
-      accessToken: data.body.access_token,
-      expiresIn: data.body.expires_in,
-      playlist: data.body
+      newReleases: data.body
     })
+    console.log(data.body);
+    done();
   })
   .catch(err => {
-    console.log(err);
-    res.sendStatus(400);
+    console.log(err)
   })
 })
 
 app.listen(8888, () => console.log('server is listening.'))
-
-
