@@ -32,7 +32,7 @@ export const PlaylistsHeader = styled.div`
 export const AlbumCoverImgs = styled.div`
   width: 10rem;
   height: 10rem;
-  background: red;
+  background: ${props => props.theme.color.lightgrey};
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
