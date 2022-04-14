@@ -10,6 +10,7 @@ import { GlobalStyle } from './styles/GlobalStyle';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './styles/Theme.style';
 import Login from './Components/Login/Login';
+import Search from './Components/Search/Search';
 
 export const AppContext = createContext();
 
@@ -25,6 +26,7 @@ function App() {
             <Router>
               <Routes>
                 <Route path='/' element={code ? <Playlists/> : <Login/>}/>
+                <Route path='/search' element={<Search/>} />
               </Routes>
             </Router>
           </AppContext.Provider>

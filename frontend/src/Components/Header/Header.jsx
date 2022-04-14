@@ -39,7 +39,7 @@ const Header = () => {
                 </Link>
               </li>
               <li>
-                <Link to='/'>
+                <Link to='/search'>
                   <RiSearchLine/>
                   <p>Search</p>
                 </Link>
