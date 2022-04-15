@@ -12,9 +12,8 @@ import { AiOutlineClockCircle } from 'react-icons/ai';
 import { BsFillPlayCircleFill, BsPauseCircleFill } from 'react-icons/bs';
 import PlaylistDatas from './PlaylistDatas';
 import AudioPlayer from './AudioPlayer';
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
 import axios from 'axios';
+import Footer from '../Footer/Footer';
 
 const Playlists = ({accessToken}) => {
 
@@ -263,7 +262,6 @@ const Playlists = ({accessToken}) => {
 
   return (
     <React.Fragment>
-    <Header/>
     <PlayListsWrapper>
       <div>
         <PlaylistsHeader>
@@ -324,6 +322,7 @@ const Playlists = ({accessToken}) => {
           </PlaySonglists>
         </PlaylistsContents>
       </div>
+      <Footer/>
     </PlayListsWrapper>
     <AudioPlayer 
         isPlaying={isPlaying} 
@@ -331,7 +330,6 @@ const Playlists = ({accessToken}) => {
         clickedSong={clickedSong}
         musicOn={musicOn} 
     />
-    <Footer/>
     </React.Fragment>
   )
 }

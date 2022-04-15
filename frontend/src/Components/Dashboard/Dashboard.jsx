@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react'
 import Header from '../Header/Header'
-import Footer from '../Footer/Footer';
 import { DashboardWrapper } from './Dashboard.style';
 import { AppContext } from '../../App';
 import Home from '../Home/Home';
@@ -29,7 +28,6 @@ const Dashboard = () => {
         {isPlaylists && <Playlists accessToken={accessToken}/>}
         {isSearch && <Search accessToken={accessToken}/>}
       </DashboardWrapper>
-      <Footer/>
     </React.Fragment>
   )
 }
