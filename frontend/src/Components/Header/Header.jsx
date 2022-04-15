@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { HeaderWrapper, LogoWrapper, NavigationsWrapper } from './Header.style';
 import SpotifyLogo from '../../assets/images/Spotify_Logo_RGB_White.png';
-import { Link } from 'react-router-dom';
 import { RiSearchLine, RiAddBoxFill, RiHome4Line } from 'react-icons/ri';
 import { VscLibrary } from 'react-icons/vsc';
 import { BiHeartSquare } from 'react-icons/bi';
 import HamburgerMenu from './Hamburger';
 
-const Header = () => {
+const Header = ({ setIsHome, setIsPlaylists, setIsSearch }) => {
 
   const [isOpen, setOpen] = useState(false)
 
@@ -19,6 +18,24 @@ const Header = () => {
   const menuToggle = () => {
     setOpen(prev => !prev)
   };
+
+  const isHome = () => {
+    setIsHome(true);
+    setIsPlaylists(false);
+    setIsSearch(false);
+  }
+
+  const isPlaylists = () => {
+    setIsHome(false);
+    setIsPlaylists(true);
+    setIsSearch(false);
+  }
+
+  const isSearch = () => {
+    setIsHome(false);
+    setIsPlaylists(false);
+    setIsSearch(true);
+  }
 
   return (
     <HeaderWrapper style={!isDeskTop ? {left: isOpen ? '0' : '-70%'} : {left: '0'}}>
@@ -32,27 +49,21 @@ const Header = () => {
         )}
           <NavigationsWrapper>
             <ul>
-              <li>
-                <Link to='/'>
-                  <RiHome4Line/>
-                  <p>Home</p>
-                </Link>
+              <li onClick={isHome}>
+                <RiHome4Line/>
+                <p>Home</p>
+              </li>
+              <li onClick={isSearch}>
+                <RiSearchLine/>
+                <p>Search</p>
               </li>
               <li>
-                <Link to='/search'>
-                  <RiSearchLine/>
-                  <p>Search</p>
-                </Link>
-              </li>
-              <li>
-                <Link to='/'>
-                  <VscLibrary/>
-                  <p>My library</p>
-                </Link>
+                <VscLibrary/>
+                <p>My library</p>
               </li>
             </ul>
             <ul>
-              <li>
+              <li onClick={isPlaylists}>
                 <RiAddBoxFill/>
                 <p>Create Playlists</p>
               </li>

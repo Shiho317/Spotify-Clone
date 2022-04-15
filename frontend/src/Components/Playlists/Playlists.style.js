@@ -9,7 +9,7 @@ export const PlayListsWrapper = styled.div`
   overflow: scroll;
 
   @media ${props => props.theme.device.laptop} {
-    width: 83%;
+    width: 100%;
   }
 `
 

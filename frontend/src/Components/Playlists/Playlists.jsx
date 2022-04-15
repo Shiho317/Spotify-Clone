@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { AppContext } from '../../App';
+import React, { useEffect, useState } from 'react';
 import { 
   AlbumCoverImg, 
   AlbumCoverImgs, 
@@ -15,13 +14,9 @@ import PlaylistDatas from './PlaylistDatas';
 import AudioPlayer from './AudioPlayer';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
-import Auth from '../Auth/Auth';
 import axios from 'axios';
 
-const Playlists = () => {
-
-  const { code } = useContext(AppContext);
-  const accessToken = Auth(code);
+const Playlists = ({accessToken}) => {
 
   const [ datas, setDatas ] = useState({
     collaborative: false,
@@ -158,8 +153,6 @@ const Playlists = () => {
       console.log(err)
     })
   },[accessToken, playlistId])
-
-  console.log(datas);
 
   const itemsDuration = PlaylistItems.map(item => {
     return item.track.duration_ms
