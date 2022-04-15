@@ -1,7 +1,7 @@
 import React from 'react'
-import { ItemsWrapper } from './NewRelease.style';
+import { ItemsWrapper } from './NrItems.style';
 
-const NewReleases = ({item}) => {
+const NrItems = ({ item }) => {
 
   const artists = item.artists.map(artist => {
     return artist
@@ -26,4 +26,4 @@ const NewReleases = ({item}) => {
   )
 }
 
-export default NewReleases
+export default NrItems
