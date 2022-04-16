@@ -7,6 +7,12 @@ export const DashboardWrapper = styled.div`
   width: 100%;
   height: 100vh;
   overflow: scroll;
+  -ms-overflow-style: none;    /* IE, Edge */
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari */
+  }
 
   @media ${props => props.theme.device.laptop} {
     width: 83%;

@@ -8,13 +8,19 @@ export const SearchWrapper = styled.div`
   height: 100vh;
   overflow: scroll;
   background: ${props => props.theme.color.lightblack};
+  -ms-overflow-style: none;    /* IE, Edge 対応 */
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   @media ${props => props.theme.device.laptop} {
-    width: 83%;
+    width: 100%;
   }
 `
 
-export const SearchForm = styled.div`
+export const SearchForm = styled.form`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -42,4 +48,12 @@ export const SearchButton = styled.button`
   &:hover{
     color: ${props => props.theme.color.lightgrey};
   }
+`
+
+export const ResultsWrapper = styled.ul`
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  align-items: center;
+  margin: 4rem 0;
 `
