@@ -1,5 +1,9 @@
 import React from 'react'
-import { LoginButton, LoginImage, LoginWrapper } from './Login.style';
+import { 
+  LoginButton, 
+  LoginImage, 
+  LoginWrapper 
+} from './Login.style';
 import loginLogo from '../../assets/images/Spotify_Logo_RGB_White.png';
 
 const Login = () => {
