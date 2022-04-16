@@ -88,7 +88,7 @@ const ArtistsTop = ({ accessToken, clickedArtist }) => {
     .catch(err => {
       console.log(err)
     })
-  })
+  },[accessToken, clickedArtist.id])
 
   return (
     <ArtistsTopWrapper>
