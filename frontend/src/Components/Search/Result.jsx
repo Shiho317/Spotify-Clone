@@ -2,10 +2,17 @@ import React from 'react'
 import { ArtistImageWrapper, ResultWrapper } from './Result.style'
 import undefinedImg from '../../assets/images/artist-undefined.jpeg';
 
-const Result = ({ result }) => {
+const Result = ({ result, setClickedArtist }) => {
+
+  const onClickedArtist = () => {
+    setClickedArtist({
+      name: result.name,
+      id: result.id
+    })
+  };
 
   return (
-    <ResultWrapper>
+    <ResultWrapper onClick={onClickedArtist}>
       <ArtistImageWrapper>
         <img src={result.images.length > 0 ? result.images[0].url : undefinedImg} alt='artist' />
       </ArtistImageWrapper>

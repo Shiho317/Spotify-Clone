@@ -1,10 +1,10 @@
 import React, { useState, useRef } from 'react'
 import Footer from '../Footer/Footer'
-import Header from '../Header/Header'
 import { ResultsWrapper, SearchButton, SearchForm, SearchWrapper } from './Search.style'
 import { FiSearch } from 'react-icons/fi'
 import Result from './Result'
 import axios from 'axios'
+import ArtistsTop from './ArtistsTop'
 
 const Search = ({ accessToken }) => {
 
@@ -56,27 +56,45 @@ const Search = ({ accessToken }) => {
       type: '',
       uri: ''
     }
-  ])
+  ]);
+
+  const [ clickedArtist, setClickedArtist ] = useState({
+    name: '',
+    id: null
+  });
 
   return (
     <React.Fragment>
-      <Header/>
       <SearchWrapper>
         <SearchForm onSubmit={submitArtistName}>
-          <input type='text' placeholder='artist' ref={isInput}/>
-          <SearchButton type='submit'>
+          <input 
+            type='text' 
+            placeholder='artist' 
+            ref={isInput}
+          />
+          <SearchButton 
+            type='submit'>
             <FiSearch/>
           </SearchButton>
         </SearchForm>
         {isName && (
           <ResultsWrapper>
             {results.map((result, index) => (
-              <Result key={index} result={result}/>
+              <Result 
+                key={index} 
+                result={result}
+                setClickedArtist={setClickedArtist}/>
             ))}
           </ResultsWrapper>
         )}
+        {clickedArtist.id !== null &&
+          <ArtistsTop 
+            accessToken={accessToken}
+            clickedArtist={clickedArtist} 
+          />
+        }
+        <Footer/>
       </SearchWrapper>
-      <Footer/>
     </React.Fragment>
   )
 }
