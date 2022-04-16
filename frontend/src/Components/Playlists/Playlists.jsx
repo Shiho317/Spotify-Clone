@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { AppContext } from '../../App';
+import React, { useEffect, useState } from 'react';
 import { 
   AlbumCoverImg, 
   AlbumCoverImgs, 
@@ -13,15 +12,10 @@ import { AiOutlineClockCircle } from 'react-icons/ai';
 import { BsFillPlayCircleFill, BsPauseCircleFill } from 'react-icons/bs';
 import PlaylistDatas from './PlaylistDatas';
 import AudioPlayer from './AudioPlayer';
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
-import Auth from '../Auth/Auth';
 import axios from 'axios';
+import Footer from '../Footer/Footer';
 
-const Playlists = () => {
-
-  const { code } = useContext(AppContext);
-  const accessToken = Auth(code);
+const Playlists = ({accessToken}) => {
 
   const [ datas, setDatas ] = useState({
     collaborative: false,
@@ -159,8 +153,6 @@ const Playlists = () => {
     })
   },[accessToken, playlistId])
 
-  console.log(datas);
-
   const itemsDuration = PlaylistItems.map(item => {
     return item.track.duration_ms
   })
@@ -270,7 +262,6 @@ const Playlists = () => {
 
   return (
     <React.Fragment>
-    <Header/>
     <PlayListsWrapper>
       <div>
         <PlaylistsHeader>
@@ -331,6 +322,7 @@ const Playlists = () => {
           </PlaySonglists>
         </PlaylistsContents>
       </div>
+      <Footer/>
     </PlayListsWrapper>
     <AudioPlayer 
         isPlaying={isPlaying} 
@@ -338,7 +330,6 @@ const Playlists = () => {
         clickedSong={clickedSong}
         musicOn={musicOn} 
     />
-    <Footer/>
     </React.Fragment>
   )
 }

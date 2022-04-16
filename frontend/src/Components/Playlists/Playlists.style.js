@@ -7,9 +7,15 @@ export const PlayListsWrapper = styled.div`
   width: 100%;
   height: 100vh;
   overflow: scroll;
+  -ms-overflow-style: none;    /* IE, Edge 対応 */
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   @media ${props => props.theme.device.laptop} {
-    width: 83%;
+    width: 100%;
   }
 `
 
@@ -101,6 +107,12 @@ export const PlaylistsContents = styled.div`
   padding: 2rem;
   background: linear-gradient(to bottom, ${props => props.theme.color.deepgrey}, ${props => props.theme.color.lightblack});
   overflow: scroll;
+  -ms-overflow-style: none;    /* IE, Edge 対応 */
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `
 
 export const PlayButton = styled.button`
