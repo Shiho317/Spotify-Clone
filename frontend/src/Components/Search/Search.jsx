@@ -1,6 +1,11 @@
 import React, { useState, useRef } from 'react'
 import Footer from '../Footer/Footer'
-import { ResultsWrapper, SearchButton, SearchForm, SearchWrapper } from './Search.style'
+import { 
+  ResultsWrapper, 
+  SearchButton, 
+  SearchForm, 
+  SearchWrapper 
+} from './Search.style'
 import { FiSearch } from 'react-icons/fi'
 import Result from './Result'
 import axios from 'axios'

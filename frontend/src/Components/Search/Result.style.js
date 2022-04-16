@@ -42,5 +42,6 @@ export const ArtistImageWrapper = styled.div`
 
   & img{
     width: 100%;
+    cursor: pointer;
   }
 `

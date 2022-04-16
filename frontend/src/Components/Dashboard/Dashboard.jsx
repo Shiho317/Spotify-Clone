@@ -6,13 +6,14 @@ import Home from '../Home/Home';
 import Playlists from '../Playlists/Playlists';
 import Search from '../Search/Search';
 import Auth from '../Auth/Auth';
+import MyLibrary from '../MyLibrary/MyLibrary';
 
 const Dashboard = () => {
 
   const [ isHome, setIsHome ] = useState(true);
   const [ isPlaylists, setIsPlaylists ] = useState(false);
   const [ isSearch, setIsSearch ] = useState(false);
-  const [ isLiked, setIsLiked ] = useState(false);
+  const [ isLibrary, setIsLibrary ] = useState(false);
 
   const { code } = useContext(AppContext);
   const accessToken = Auth(code);
@@ -22,11 +23,21 @@ const Dashboard = () => {
       <Header 
         setIsHome={setIsHome} 
         setIsPlaylists={setIsPlaylists} 
-        setIsSearch={setIsSearch}/>
+        setIsSearch={setIsSearch}
+        setIsLibrary={setIsLibrary}/>
       <DashboardWrapper>
-        {isHome && <Home accessToken={accessToken}/>}
-        {isPlaylists && <Playlists accessToken={accessToken}/>}
-        {isSearch && <Search accessToken={accessToken}/>}
+        {isHome && 
+          <Home accessToken={accessToken}/>
+        }
+        {isPlaylists && 
+          <Playlists accessToken={accessToken}/>
+        }
+        {isSearch && 
+          <Search accessToken={accessToken}/>
+        }
+        {isLibrary && 
+          <MyLibrary accessToken={accessToken}/>
+        }
       </DashboardWrapper>
     </React.Fragment>
   )

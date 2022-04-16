@@ -1,13 +1,26 @@
 import React, { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
-import { HeaderWrapper, LogoWrapper, NavigationsWrapper } from './Header.style';
+import { 
+  HeaderWrapper, 
+  LogoWrapper, 
+  NavigationsWrapper
+} from './Header.style';
 import SpotifyLogo from '../../assets/images/Spotify_Logo_RGB_White.png';
-import { RiSearchLine, RiAddBoxFill, RiHome4Line } from 'react-icons/ri';
+import { 
+  RiSearchLine, 
+  RiAddBoxFill, 
+  RiHome4Line 
+} from 'react-icons/ri';
 import { VscLibrary } from 'react-icons/vsc';
 import { BiHeartSquare } from 'react-icons/bi';
 import HamburgerMenu from './Hamburger';
 
-const Header = ({ setIsHome, setIsPlaylists, setIsSearch }) => {
+const Header = ({ 
+  setIsHome, 
+  setIsPlaylists, 
+  setIsSearch, 
+  setIsLibrary 
+}) => {
 
   const [isOpen, setOpen] = useState(false)
 
@@ -23,18 +36,28 @@ const Header = ({ setIsHome, setIsPlaylists, setIsSearch }) => {
     setIsHome(true);
     setIsPlaylists(false);
     setIsSearch(false);
+    setIsLibrary(false)
   }
 
   const isPlaylists = () => {
     setIsHome(false);
     setIsPlaylists(true);
     setIsSearch(false);
+    setIsLibrary(false)
   }
 
   const isSearch = () => {
     setIsHome(false);
     setIsPlaylists(false);
     setIsSearch(true);
+    setIsLibrary(false)
+  }
+
+  const isLibrary = () => {
+    setIsHome(false);
+    setIsPlaylists(false)
+    setIsSearch(false)
+    setIsLibrary(true)
   }
 
   return (
@@ -57,19 +80,19 @@ const Header = ({ setIsHome, setIsPlaylists, setIsSearch }) => {
                 <RiSearchLine/>
                 <p>Search</p>
               </li>
-              <li>
+              <li onClick={isLibrary}>
                 <VscLibrary/>
-                <p>My library</p>
+                <p>My Library</p>
               </li>
             </ul>
             <ul>
               <li onClick={isPlaylists}>
                 <RiAddBoxFill/>
-                <p>Create Playlists</p>
+                <p>My Playlists</p>
               </li>
               <li>
                 <BiHeartSquare/>
-                <p>Your favorite</p>
+                <p>My Favourite</p>
               </li>
             </ul>
           </NavigationsWrapper>

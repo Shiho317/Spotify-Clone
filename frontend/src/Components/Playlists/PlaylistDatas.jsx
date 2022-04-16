@@ -2,7 +2,13 @@ import React, { useCallback, useState } from 'react';
 import { SongDetails, SongDetailsWrapper } from './PlaylistDatas.style';
 import { MdMusicNote, MdMusicOff } from 'react-icons/md';
 
-const PlaylistDatas = ({ item, index, setClickedSong, musicOn, setIsMusicOn }) => {
+const PlaylistDatas = ({ 
+  item, 
+  index, 
+  setClickedSong, 
+  musicOn, 
+  setIsMusicOn 
+}) => {
 
   const artists = item.track.album.artists.map(artist => {
       return artist
