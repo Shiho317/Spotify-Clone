@@ -17,11 +17,18 @@ export const NewReleasesWrapper = styled.div`
 `
 
 export const NrItemsWrapper = styled.ul`
-  width: 150%;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  width: 200%;
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
   margin-bottom: 4rem;
   gap: 4rem 0;
+
+  @media ${props => props.theme.device.laptop} {
+    width: 150%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    align-items: center;
+  }
 ` 

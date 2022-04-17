@@ -52,8 +52,24 @@ export const SearchButton = styled.button`
 
 export const ResultsWrapper = styled.ul`
   width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  align-items: center;
+  display: flex;
+  gap: 2rem;
+  padding: 1rem;
   margin: 4rem 0;
+  overflow: scroll;
+  background: ${props => props.theme.color.lightblack};
+  -ms-overflow-style: none;    /* IE, Edge 対応 */
+  scrollbar-width: none;
+
+  @media ${props => props.theme.device.laptop} {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    align-items: center;
+    gap: 0;
+    padding: 0;
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `

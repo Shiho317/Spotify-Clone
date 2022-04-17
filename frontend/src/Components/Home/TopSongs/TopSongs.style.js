@@ -17,8 +17,13 @@ export const TopSongsWrapper = styled.div`
 `
 
 export const TopSongsItemsWrapper = styled.ul`
-  width: 150%;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  align-items: center;
+  width: 200%;
+  display: flex;
+
+  @media ${props => props.theme.device.laptop} {
+    width: 150%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    align-items: center;
+  }
 `

@@ -30,7 +30,7 @@ export const CurrentPlaylistWrapper = styled.li`
 
 export const PlaylistCover = styled.div`
   width: 10rem;
-  height: 10rem;
+  height: 15rem;
   background: ${props => props.theme.color.deepgrey};
   color: ${props => props.theme.color.lightgrey};
   display: flex;
