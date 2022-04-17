@@ -7,6 +7,7 @@ const FavouriteSong = ({
   item, 
   index,
   setClickedSong,
+  clickedSong,
   musicOn, 
   setIsMusicOn
 }) => {
@@ -48,14 +49,16 @@ const FavouriteSong = ({
   const musicToggle = useCallback(() => {
     setIsMusicOn(prev => !prev)
     setClickedSong(item)
-  }, [item,setClickedSong, setIsMusicOn])
+  }, [item, setClickedSong, setIsMusicOn])
 
   return (
     <FavouriteSongWrapper onMouseOver={isHoverOn} onMouseOut={isHoverOn}>
       <li>
       {isOnHover ? (
         <p className='index-play'>
-          {musicOn ? <MdMusicOff onClick={musicToggle}/> : <MdMusicNote onClick={musicToggle}/>}
+          {clickedSong.track.id === item.track.id && musicOn ? 
+            <MdMusicOff onClick={() => musicToggle()}/>
+            : <MdMusicNote onClick={() => musicToggle()}/>}
         </p>
       ) : (
         <p className='index-play'>
