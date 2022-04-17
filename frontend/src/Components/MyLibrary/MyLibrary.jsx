@@ -1,95 +1,51 @@
 import React, { useEffect, useState } from 'react'
-import { MyLibraryWrapper, SavedTracksWrapper } from './MyLibrary.style'
+import { CurrentPlaylistsWrapper, MyFavouriteList, MyLibraryWrapper } from './MyLibrary.style'
 import axios from 'axios'
-import SavedTracks from './SavedTracks'
+import CurrentPlaylist from './CurrentPlaylist'
 import Footer from '../Footer/Footer'
 
-const MyLibrary = ({ accessToken }) => {
+const MyLibrary = ({ 
+  accessToken, 
+  setIsLibrary, 
+  setIsPlaylists, 
+  setIsFavourite 
+}) => {
 
-  const [ savedTracks, setSavedTracks ] = useState([
+  const [ currentPlaylists, setCurrentPlaylists ] = useState([
     {
-      added_at: "",
-      track: {
-        album: {
-          album_type: "",
-          artists: [
-            {
-              external_urls: {
-                spotify: ""
-              },
-              href: "",
-              id: "",
-              name: "",
-              type: "",
-              uri: ""
-            },
-            {
-              external_urls: {
-                spotify: ""
-              },
-              href: "",
-              id: "",
-              name: "",
-              type: "",
-              uri: ""
-            }
-          ],
-          external_urls: {
-            spotify: ""
-          },
-          href: "",
-          id: "",
-          images: [
-            {
-              height: 640,
-              url: "",
-              width: 640
-            },
-          ],
-          name: "",
-          release_date: "",
-          release_date_precision: "",
-          total_tracks: 1,
-          type: "",
-          uri: ""
-        },
-        artists: [
-          {
-            external_urls: {
-              spotify: ""
-            },
-            href: "",
-            id: "",
-            name: "",
-            type: "",
-            uri: ""
-          },
-        ],
-        disc_number: 1,
-        duration_ms: 228482,
-        explicit: false,
-        external_ids: {
-          isrc: ""
-        },
+      collaborative: false,
+      description: "",
+      external_urls: {
+        spotify: ""
+      },
+      href: "",
+      id: "",
+      images: [],
+      name: "",
+      owner: {
+        display_name: "",
         external_urls: {
           spotify: ""
         },
         href: "",
         id: "",
-        is_local: false,
-        is_playable: true,
-        name: "",
-        popularity: 0,
-        preview_url: null,
-        track_number: 1,
         type: "",
         uri: ""
-      }
-    }
+      },
+      primary_color: null,
+      public: false,
+      snapshot_id: "",
+      tracks: {
+        href: "",
+        total: 0
+      },
+      type: "playlist",
+      uri: ""
+    },
   ])
 
   useEffect(() => {
-    axios.get('https://api.spotify.com/v1/me/tracks?market=CA&limit=10&offset=0', {
+    axios.get('https://api.spotify.com/v1/me/playlists?limit=10&offset=0', {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
@@ -97,25 +53,33 @@ const MyLibrary = ({ accessToken }) => {
       }
     })
     .then(res => {
-      setSavedTracks(res.data.items)
+      setCurrentPlaylists(res.data.items)
     })
     .catch(err => {
       console.log(err)
     })
   },[accessToken])
 
+  const toFavouriteList = () => {
+    setIsFavourite(true);
+    setIsLibrary(false);
+  }
+
   return (
     <MyLibraryWrapper>
       <h1>My Library</h1>
-      {savedTracks.length > 0 ? (
-        <SavedTracksWrapper>
-        {savedTracks.map((track, index) => (
-          <SavedTracks key={index} track={track} />
+        <MyFavouriteList onClick={toFavouriteList}>
+          <h2>My Favourite Songs</h2>
+        </MyFavouriteList>
+        <CurrentPlaylistsWrapper>
+        {currentPlaylists.map((playlist, index) => (
+          <CurrentPlaylist 
+            key={index} 
+            playlist={playlist}
+            setIsPlaylists={setIsPlaylists}
+            setIsLibrary={setIsLibrary}/>
         ))}
-      </SavedTracksWrapper>
-      ) : (
-        <h4>No tracks in your library.</h4>
-      )}
+        </CurrentPlaylistsWrapper>
       <Footer/>
     </MyLibraryWrapper>
   )

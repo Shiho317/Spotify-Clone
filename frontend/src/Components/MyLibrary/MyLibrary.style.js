@@ -8,6 +8,7 @@ export const MyLibraryWrapper = styled.div`
   height: 100vh;
   overflow: scroll;
   background: ${props => props.theme.color.lightblack};
+  padding: 2rem;
 
   -ms-overflow-style: none;    /* IE, Edge */
   scrollbar-width: none;
@@ -19,16 +20,31 @@ export const MyLibraryWrapper = styled.div`
 
   & h1 {
     color: ${props => props.theme.color.white};
-    margin: 2rem;
+    margin-bottom: 2rem;
   }
 `
 
-export const SavedTracksWrapper = styled.ul`
+export const CurrentPlaylistsWrapper = styled.ul`
   width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  display: flex;
   align-items: center;
   margin-bottom: 4rem;
-  gap: 4rem 0;
+  gap: 2rem
+`
+
+export const MyFavouriteList = styled.div`
+  width: 25rem;
+  height: 18rem;
+  background: linear-gradient(to bottom right, #422cea, #8888df);
+  cursor: pointer;
+  display: flex;
+  align-items: end;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  border-radius: 5px;
+
+  & h2{
+    color: white;
+    font-size: 1.8rem;
+  }
 `

@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-export const PlayListsWrapper = styled.div`
+export const MyFavouriteWrapper = styled.div`
   position: absolute;
   top: 0;
   right: 0;
@@ -19,10 +19,10 @@ export const PlayListsWrapper = styled.div`
   }
 `
 
-export const PlaylistsHeader = styled.div`
+export const FavouriteSongsHeader = styled.div`
   width: 100%;
   height: 40vh;
-  background: linear-gradient(to bottom, #DCDCDC, #696969);
+  background: linear-gradient(to bottom, #4c3e96, #282151);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -36,43 +36,21 @@ export const PlaylistsHeader = styled.div`
   }
 `
 
-export const AlbumCoverImgs = styled.div`
+export const FavouriteSongsLogo = styled.div`
   width: 10rem;
   height: 10rem;
-  background: ${props => props.theme.color.lightgrey};
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  background: linear-gradient(to bottom right, #3b25b0 , #7d8b8a);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   box-shadow: 0 0 3rem rgba(0, 0, 0, 0.5);
-
-  & img{
-    width: 100%;
-    height: 100%;
-  }
+  font-size: 4.5rem;
+  color: ${props => props.theme.color.white};
 
   @media ${props => props.theme.device.laptop} {
     width: 15rem;
     height: 15rem;
   }
-`
-
-export const AlbumCoverImg = styled.div`
-  width: 10rem;
-  height: 10rem;
-  background: red;
-  display: grid;
-  box-shadow: 0 0 3rem rgba(0, 0, 0, 0.5);
-
-& img{
-  width: 100%;
-  height: 100%;
-  background: grey;
-}
-
-@media ${props => props.theme.device.laptop} {
-  width: 15rem;
-  height: 15rem;
-}
 `
 
 export const HeaderTitleWrapper = styled.div`
@@ -102,9 +80,9 @@ export const HeaderTitleWrapper = styled.div`
   }
 `
 
-export const PlaylistsContents = styled.div`
+export const FavouriteSongsContents = styled.div`
   width: 100%;
-  height: 100%;
+  height: 48vh;
   padding: 2rem;
   background: linear-gradient(to bottom, ${props => props.theme.color.deepgrey}, ${props => props.theme.color.lightblack});
   overflow: scroll;
@@ -136,7 +114,7 @@ export const PlayButton = styled.button`
   }
 `
 
-export const PlaySonglists = styled.div`
+export const FavouriteSonglists = styled.div`
   width: 300%;
   margin-top: 2rem;
   display: flex;
