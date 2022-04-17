@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { 
   HeaderWrapper, 
@@ -19,7 +19,8 @@ const Header = ({
   setIsHome, 
   setIsPlaylists, 
   setIsSearch, 
-  setIsLibrary 
+  setIsLibrary,
+  setIsFavourite 
 }) => {
 
   const [isOpen, setOpen] = useState(false)
@@ -32,33 +33,45 @@ const Header = ({
     setOpen(prev => !prev)
   };
 
-  const isHome = () => {
+  const isHome = useCallback(() => {
     setIsHome(true);
     setIsPlaylists(false);
     setIsSearch(false);
-    setIsLibrary(false)
-  }
+    setIsLibrary(false);
+    setIsFavourite(false);
+  },[setIsHome, setIsPlaylists, setIsSearch, setIsLibrary, setIsFavourite])
 
-  const isPlaylists = () => {
+  const isPlaylists = useCallback(() => {
     setIsHome(false);
     setIsPlaylists(true);
     setIsSearch(false);
-    setIsLibrary(false)
-  }
+    setIsLibrary(false);
+    setIsFavourite(false);
+  },[setIsHome, setIsPlaylists, setIsSearch, setIsLibrary, setIsFavourite])
 
-  const isSearch = () => {
+  const isSearch = useCallback(() => {
     setIsHome(false);
     setIsPlaylists(false);
     setIsSearch(true);
-    setIsLibrary(false)
-  }
+    setIsLibrary(false);
+    setIsFavourite(false);
+  },[setIsHome, setIsPlaylists, setIsSearch, setIsLibrary, setIsFavourite])
 
-  const isLibrary = () => {
+  const isLibrary = useCallback(() => {
     setIsHome(false);
-    setIsPlaylists(false)
-    setIsSearch(false)
-    setIsLibrary(true)
-  }
+    setIsPlaylists(false);
+    setIsSearch(false);
+    setIsLibrary(true);
+    setIsFavourite(false);
+  },[setIsHome, setIsPlaylists, setIsSearch, setIsLibrary, setIsFavourite])
+
+  const isFavourite = useCallback(() => {
+    setIsHome(false);
+    setIsPlaylists(false);
+    setIsSearch(false);
+    setIsLibrary(false);
+    setIsFavourite(true);
+  },[setIsHome, setIsPlaylists, setIsSearch, setIsLibrary, setIsFavourite])
 
   return (
     <HeaderWrapper style={!isDeskTop ? {left: isOpen ? '0' : '-70%'} : {left: '0'}}>
@@ -90,7 +103,7 @@ const Header = ({
                 <RiAddBoxFill/>
                 <p>My Playlists</p>
               </li>
-              <li>
+              <li onClick={isFavourite}>
                 <BiHeartSquare/>
                 <p>My Favourite</p>
               </li>
