@@ -270,6 +270,7 @@ const MyFavourite = ({ accessToken }) => {
                     item={item} 
                     index={index} 
                     setClickedSong={setClickedSong} 
+                    clickedSong={clickedSong}
                     musicOn={musicOn} 
                     setIsMusicOn={setIsMusicOn}/>
                 ))}

@@ -315,7 +315,8 @@ const Playlists = ({accessToken}) => {
                 key={index} 
                 item={item} 
                 index={index} 
-                setClickedSong={setClickedSong} 
+                setClickedSong={setClickedSong}
+                clickedSong={clickedSong} 
                 musicOn={musicOn} 
                 setIsMusicOn={setIsMusicOn}/>
             ))}
@@ -325,6 +326,7 @@ const Playlists = ({accessToken}) => {
       <Footer/>
     </PlayListsWrapper>
     <AudioPlayer 
+        accessToken={accessToken}
         isPlaying={isPlaying} 
         setIsPlaying={setIsPlaying} 
         clickedSong={clickedSong}
