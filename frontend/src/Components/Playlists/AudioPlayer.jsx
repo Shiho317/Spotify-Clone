@@ -86,6 +86,9 @@ const AudioPlayer = ({
     setIsFav(prev => !prev);
   };
 
+  console.log(clickedSong.track.preview_url)
+  console.log(clickedSong.track.id)
+
   const artistName = clickedSong.track.album.artists.map(artist => {
     return artist
   });
@@ -142,7 +145,7 @@ const AudioPlayer = ({
         </AudioBar>
       </AudioProgress>
       <AudioFavButton>
-        <button onClick={onClickFav}>
+        <button onClick={() => onClickFav()}>
           {isFav ? 
             <FaHeart/>
             : 

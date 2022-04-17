@@ -266,7 +266,7 @@ const MyFavourite = ({ accessToken }) => {
               </ul>
                 {isLikedTracks.map((item, index) => (
                   <FavouriteSong 
-                    key={index} 
+                    key={index+10} 
                     item={item} 
                     index={index} 
                     setClickedSong={setClickedSong} 
