@@ -5,42 +5,7 @@ import TopSongsItem from './TopSongsItem';
 
 const TopSongs = ({ accessToken }) => {
 
-  const [ items, setItems ] = useState([
-    {
-      collaborative: false,
-      description: "",
-      external_urls: {
-        spotify: "",
-      },
-      href: "",
-      id: "",
-      images: [{
-        height: 0,
-        url: "",
-        width: 0,
-      }],
-      name: "",
-      owner: {
-        display_name: "",
-        external_urls: {
-          spotify: ""
-        },
-        href: "",
-        id: "",
-        type: "",
-        uri: "",
-      },
-      primary_color: "",
-      public: false,
-      snapshot_id: "",
-      tracks: {
-        href: "",
-        total: 0,
-      },
-      type: 'playlist',
-      uri: '',
-    }
-  ]);
+  const [ items, setItems ] = useState([]);
 
   useEffect(() => {
     axios.get('https://api.spotify.com/v1/browse/categories/toplists/playlists?country=CA&limit=5&offset=0', {
@@ -63,7 +28,7 @@ const TopSongs = ({ accessToken }) => {
     <TopSongsWrapper>
       <h1>Top Songs</h1>
       <TopSongsItemsWrapper>
-        {items.map((item, index) => (
+        {items.length > 0 && items.map((item, index) => (
           <TopSongsItem key={index} item={item} />
         ))}
       </TopSongsItemsWrapper>

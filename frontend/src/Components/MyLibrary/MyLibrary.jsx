@@ -11,38 +11,7 @@ const MyLibrary = ({
   setIsFavourite 
 }) => {
 
-  const [ currentPlaylists, setCurrentPlaylists ] = useState([
-    {
-      collaborative: false,
-      description: "",
-      external_urls: {
-        spotify: ""
-      },
-      href: "",
-      id: "",
-      images: [],
-      name: "",
-      owner: {
-        display_name: "",
-        external_urls: {
-          spotify: ""
-        },
-        href: "",
-        id: "",
-        type: "",
-        uri: ""
-      },
-      primary_color: null,
-      public: false,
-      snapshot_id: "",
-      tracks: {
-        href: "",
-        total: 0
-      },
-      type: "playlist",
-      uri: ""
-    },
-  ])
+  const [ currentPlaylists, setCurrentPlaylists ] = useState([])
 
   useEffect(() => {
     axios.get('https://api.spotify.com/v1/me/playlists?limit=10&offset=0', {
@@ -72,7 +41,7 @@ const MyLibrary = ({
           <h2>My Favourite Songs</h2>
         </MyFavouriteList>
         <CurrentPlaylistsWrapper>
-        {currentPlaylists.map((playlist, index) => (
+        {currentPlaylists.length > 0 && currentPlaylists.map((playlist, index) => (
           <CurrentPlaylist 
             key={index} 
             playlist={playlist}
