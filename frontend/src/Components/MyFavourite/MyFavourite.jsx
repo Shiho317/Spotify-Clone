@@ -18,87 +18,7 @@ import FavouriteSong from './FavouriteSong';
 
 const MyFavourite = ({ accessToken }) => {
 
-  const [ isLikedTracks, setLikedTracks ] = useState([
-    {
-      added_at: "",
-      track: {
-        album: {
-          album_type: "",
-          artists: [
-            {
-              external_urls: {
-                spotify: ""
-              },
-              href: "",
-              id: "",
-              name: "",
-              type: "",
-              uri: ""
-            },
-            {
-              external_urls: {
-                spotify: ""
-              },
-              href: "",
-              id: "",
-              name: "",
-              type: "",
-              uri: ""
-            }
-          ],
-          external_urls: {
-            spotify: ""
-          },
-          href: "",
-          id: "",
-          images: [
-            {
-              height: 640,
-              url: "",
-              width: 640
-            },
-          ],
-          name: "",
-          release_date: "",
-          release_date_precision: "",
-          total_tracks: 1,
-          type: "",
-          uri: ""
-        },
-        artists: [
-          {
-            external_urls: {
-              spotify: ""
-            },
-            href: "",
-            id: "",
-            name: "",
-            type: "",
-            uri: ""
-          },
-        ],
-        disc_number: 1,
-        duration_ms: 0,
-        explicit: false,
-        external_ids: {
-          isrc: ""
-        },
-        external_urls: {
-          spotify: ""
-        },
-        href: "",
-        id: "",
-        is_local: false,
-        is_playable: true,
-        name: "",
-        popularity: 0,
-        preview_url: null,
-        track_number: 1,
-        type: "",
-        uri: ""
-      }
-    }
-  ])
+  const [ isLikedTracks, setLikedTracks ] = useState([]);
 
   useEffect(() => {
     axios.get('https://api.spotify.com/v1/me/tracks?market=CA&limit=10&offset=0', {
@@ -222,10 +142,12 @@ const MyFavourite = ({ accessToken }) => {
         uri: ""
       }
     }
-  )
+  );
 
   return (
     <React.Fragment>
+      {isLikedTracks.length > 0 && (
+      <div>
       <MyFavouriteWrapper>
         <div>
           <FavouriteSongsHeader>
@@ -264,7 +186,7 @@ const MyFavourite = ({ accessToken }) => {
                   </p>
                 </li>
               </ul>
-                {isLikedTracks.map((item, index) => (
+                {isLikedTracks.length > 0 && isLikedTracks.map((item, index) => (
                   <FavouriteSong 
                     key={index+10} 
                     item={item} 
@@ -285,6 +207,8 @@ const MyFavourite = ({ accessToken }) => {
         clickedSong={clickedSong}
         musicOn={musicOn} 
       />
+      </div>
+      )}
     </React.Fragment>
   )
 }

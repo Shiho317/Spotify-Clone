@@ -31,7 +31,7 @@ const AudioPlayer = ({
   const onLoadedMeta = () => {
     const seconds = Math.floor(audioRef.current.duration);
 		setDuration(seconds);
-		progressRef.current.max = seconds;
+    progressRef.current.max = seconds;
   };
 
   useEffect(() => {
@@ -112,6 +112,7 @@ const AudioPlayer = ({
     setIsFavSong(removedArr);
   },[isFavSong])
 
+  
   const artistName = clickedSong.track.album.artists.map(artist => {
     return artist
   });
@@ -123,6 +124,8 @@ const AudioPlayer = ({
   };
 
   return (
+    <React.Fragment>
+    {Object.keys(clickedSong).length > 0 && (
     <AudioPlayerWrapper style={{display: musicOn ? 'grid' : 'none'}}>
       <AudioDetails>
         <img src={clickedSong.track.album.images[0].url} alt='audio-cover' />
@@ -185,6 +188,8 @@ const AudioPlayer = ({
         </BigCoverImg>
       )}
     </AudioPlayerWrapper>
+    )}
+    </React.Fragment>
   )
 }
 

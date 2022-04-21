@@ -37,31 +37,7 @@ const Search = ({ accessToken }) => {
     })
   };
 
-  const [ results, setResults ] = useState([
-    {
-      external_urls: {
-        spotify: ''
-      },
-      followers: {
-        href: null,
-        total: 0,
-      },
-      genres: [],
-      href: '',
-      id: '',
-      images: [
-        {
-          height: 640,
-          url: '',
-          width: 640
-        }
-      ],
-      name: '',
-      popularity: 0,
-      type: '',
-      uri: ''
-    }
-  ]);
+  const [ results, setResults ] = useState([]);
 
   const [ clickedArtist, setClickedArtist ] = useState({
     name: '',
@@ -84,7 +60,7 @@ const Search = ({ accessToken }) => {
         </SearchForm>
         {isName && (
           <ResultsWrapper>
-            {results.map((result, index) => (
+            {results.length > 0 && results.map((result, index) => (
               <Result 
                 key={index} 
                 result={result}

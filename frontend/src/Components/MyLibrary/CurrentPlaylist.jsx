@@ -14,6 +14,7 @@ const CurrentPlaylist = ({
   }
 
   return (
+    <React.Fragment>
     <CurrentPlaylistWrapper onClick={toPlayList}>
       <PlaylistCover>
         <FiMusic/>
@@ -25,6 +26,7 @@ const CurrentPlaylist = ({
         Created by: {playlist.owner.display_name}
       </p>
     </CurrentPlaylistWrapper>
+    </React.Fragment>
   )
 }
 
