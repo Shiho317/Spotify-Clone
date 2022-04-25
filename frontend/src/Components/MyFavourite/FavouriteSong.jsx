@@ -1,18 +1,19 @@
-import React, { useCallback, useState } from 'react';
-import { SongDetails, SongDetailsWrapper } from './PlaylistDatas.style';
-import { MdMusicNote, MdMusicOff } from 'react-icons/md';
+import React, { useState, useCallback　} from 'react'
+import { FavouriteSongWrapper, SongDetails } from './FavouriteSong.style'
+import { MdMusicOff, MdMusicNote } from 'react-icons/md'
 
-const PlaylistDatas = ({ 
+
+const FavouriteSong = ({ 
   item, 
-  index, 
-  setClickedSong, 
+  index,
+  setClickedSong,
   clickedSong,
   musicOn, 
-  setIsMusicOn 
+  setIsMusicOn
 }) => {
 
-  const artists = item.track.album.artists.map(artist => {
-      return artist
+  const artists = item.track.artists.map(artist => {
+    return artist
   });
 
   const durationTime = item.track.duration_ms;
@@ -24,7 +25,7 @@ const PlaylistDatas = ({
   const year = newDate.getFullYear();
   const month = newDate.getMonth() + 1;
   const day = newDate.getDate();
-  
+
   const splitDate = item.added_at.split('T');
   const devidedDate = splitDate[0].split('-');
   const addedYear = Number(devidedDate[0]);
@@ -51,34 +52,34 @@ const PlaylistDatas = ({
   }, [item, setClickedSong, setIsMusicOn])
 
   return (
-    <SongDetailsWrapper onMouseOver={isHoverOn} onMouseOut={isHoverOn}>
+    <FavouriteSongWrapper onMouseOver={isHoverOn} onMouseOut={isHoverOn}>
       <li>
-        {isOnHover ? (
-          <p className='index-play'>
-            {clickedSong.track.id === item.track.id && musicOn ? 
-              <MdMusicOff onClick={() => musicToggle()}/>
-              : <MdMusicNote onClick={() => musicToggle()}/>}
-          </p>
-        ) : (
-          <p className='index-play'>
-            {index + 1}
-          </p>
-        )}
-        <img src={item.track.album.images[0].url} alt='track-img'/>
-        <SongDetails>
-          <h4>
-            <a href={item.track.external_urls.spotify} target="_blank" rel="noopener noreferrer">
-              {item.track.name}
+      {isOnHover ? (
+        <p className='index-play'>
+          {clickedSong.track.id === item.track.id && musicOn ? 
+            <MdMusicOff onClick={() => musicToggle()}/>
+            : <MdMusicNote onClick={() => musicToggle()}/>}
+        </p>
+      ) : (
+        <p className='index-play'>
+          {index + 1}
+        </p>
+      )}
+      <img src={item.track.album.images[0].url} alt='track-img'/>
+      <SongDetails>
+        <h4>
+          <a href={item.track.external_urls.spotify} target="_blank" rel="noopener noreferrer">
+            {item.track.name}
+          </a>
+        </h4>
+        <p>
+          {artists.map((artist, index) => (
+            <a key={artist.name} href={artist.external_urls.spotify} target="_blank" rel="noopener noreferrer">
+              {artist.name} {artists.length > 1 && index !== artists.length - 1 ? ', ' : ''}
             </a>
-          </h4>
-          <p>
-            {artists.map((artist, index) => (
-              <a key={artist.name} href={artist.external_urls.spotify} target="_blank" rel="noopener noreferrer">
-                {artist.name} {artists.length > 1 && index !== artists.length - 1 ? ', ' : ''}
-              </a>
-            ))}
-          </p>
-        </SongDetails>
+          ))}
+        </p>
+      </SongDetails>
       </li>
       <li>
         <a href={item.track.external_urls.spotify} target="_blank" rel="noopener noreferrer">
@@ -97,8 +98,8 @@ const PlaylistDatas = ({
           {min}:{sec < 10 ? "0" : ""}{sec}
         </p>
       </li>
-    </SongDetailsWrapper>
+    </FavouriteSongWrapper>
   )
 }
 
-export default PlaylistDatas
+export default FavouriteSong

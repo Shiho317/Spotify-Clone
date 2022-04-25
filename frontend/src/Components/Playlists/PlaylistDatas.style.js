@@ -7,6 +7,12 @@ export const SongDetailsWrapper = styled.ul`
   align-items: center;
   border-radius: 5px;
   overflow: scroll;
+  -ms-overflow-style: none;    /* IE, Edge 対応 */
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   &:hover{
       background: rgba(255, 255, 255, 0.2);

@@ -1,7 +1,11 @@
 import React from 'react';
 import { Spiral as Hamburger } from 'hamburger-react'
 
-const HamburgerMenu = ({ isOpen, setOpen, menuToggle }) => {
+const HamburgerMenu = ({ 
+  isOpen, 
+  setOpen, 
+  menuToggle 
+}) => {
 
   return (
     <Hamburger 

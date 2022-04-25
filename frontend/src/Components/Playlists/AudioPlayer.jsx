@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef, useCallback } from 'react'
+import axios from 'axios';
 import { 
   AudioBar, 
   AudioDetails, 
@@ -13,6 +14,7 @@ import { FaRegHeart, FaHeart } from 'react-icons/fa';
 import { GoScreenFull } from 'react-icons/go';
 
 const AudioPlayer = ({ 
+  accessToken,
   isPlaying, 
   setIsPlaying,
   clickedSong,
@@ -29,7 +31,7 @@ const AudioPlayer = ({
   const onLoadedMeta = () => {
     const seconds = Math.floor(audioRef.current.duration);
 		setDuration(seconds);
-		progressRef.current.max = seconds;
+    progressRef.current.max = seconds;
   };
 
   useEffect(() => {
@@ -81,11 +83,36 @@ const AudioPlayer = ({
 	};
 
   const [ isFav, setIsFav ] = useState(false);
+  const [ isFavSong, setIsFavSong ] = useState([]);
 
-  const onClickFav = () => {
+  const onClickFav = useCallback((id) => {
+    axios.put(`https://api.spotify.com/v1/me/tracks?ids=${id}`, {
+      headers: {
+        'ACCEPT': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
+      }
+    })
+    .then(res => {
+      setIsFav(prev => !prev);
+      setIsFavSong([
+        ...isFavSong,
+        id
+      ]);
+      console.log(res.data.track.id)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  },[isFavSong, accessToken]);
+
+  const onClickNotFav = useCallback((id) => {
     setIsFav(prev => !prev);
-  };
+    const removedArr = isFavSong.filter(song => song.id !== id);
+    setIsFavSong(removedArr);
+  },[isFavSong])
 
+  
   const artistName = clickedSong.track.album.artists.map(artist => {
     return artist
   });
@@ -97,6 +124,8 @@ const AudioPlayer = ({
   };
 
   return (
+    <React.Fragment>
+    {Object.keys(clickedSong).length > 0 && (
     <AudioPlayerWrapper style={{display: musicOn ? 'grid' : 'none'}}>
       <AudioDetails>
         <img src={clickedSong.track.album.images[0].url} alt='audio-cover' />
@@ -142,11 +171,11 @@ const AudioPlayer = ({
         </AudioBar>
       </AudioProgress>
       <AudioFavButton>
-        <button onClick={onClickFav}>
-          {isFav ? 
-            <FaHeart/>
+        <button>
+          {isFav && isFavSong.includes(clickedSong.track.id) ? 
+            <FaHeart onClick={() => onClickNotFav(clickedSong.track.id)}/>
             : 
-            <FaRegHeart/>
+            <FaRegHeart onClick={() => onClickFav(clickedSong.track.id)}/>
           }
         </button>
         <button onClick={showImage}>
@@ -159,6 +188,8 @@ const AudioPlayer = ({
         </BigCoverImg>
       )}
     </AudioPlayerWrapper>
+    )}
+    </React.Fragment>
   )
 }
 

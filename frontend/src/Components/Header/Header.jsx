@@ -1,14 +1,27 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
-import { HeaderWrapper, LogoWrapper, NavigationsWrapper } from './Header.style';
+import { 
+  HeaderWrapper, 
+  LogoWrapper, 
+  NavigationsWrapper
+} from './Header.style';
 import SpotifyLogo from '../../assets/images/Spotify_Logo_RGB_White.png';
-import { Link } from 'react-router-dom';
-import { RiSearchLine, RiAddBoxFill, RiHome4Line } from 'react-icons/ri';
+import { 
+  RiSearchLine, 
+  RiAddBoxFill, 
+  RiHome4Line 
+} from 'react-icons/ri';
 import { VscLibrary } from 'react-icons/vsc';
 import { BiHeartSquare } from 'react-icons/bi';
 import HamburgerMenu from './Hamburger';
 
-const Header = () => {
+const Header = ({ 
+  setIsHome, 
+  setIsPlaylists, 
+  setIsSearch, 
+  setIsLibrary,
+  setIsFavourite 
+}) => {
 
   const [isOpen, setOpen] = useState(false)
 
@@ -19,6 +32,46 @@ const Header = () => {
   const menuToggle = () => {
     setOpen(prev => !prev)
   };
+
+  const isHome = useCallback(() => {
+    setIsHome(true);
+    setIsPlaylists(false);
+    setIsSearch(false);
+    setIsLibrary(false);
+    setIsFavourite(false);
+  },[setIsHome, setIsPlaylists, setIsSearch, setIsLibrary, setIsFavourite])
+
+  const isPlaylists = useCallback(() => {
+    setIsHome(false);
+    setIsPlaylists(true);
+    setIsSearch(false);
+    setIsLibrary(false);
+    setIsFavourite(false);
+  },[setIsHome, setIsPlaylists, setIsSearch, setIsLibrary, setIsFavourite])
+
+  const isSearch = useCallback(() => {
+    setIsHome(false);
+    setIsPlaylists(false);
+    setIsSearch(true);
+    setIsLibrary(false);
+    setIsFavourite(false);
+  },[setIsHome, setIsPlaylists, setIsSearch, setIsLibrary, setIsFavourite])
+
+  const isLibrary = useCallback(() => {
+    setIsHome(false);
+    setIsPlaylists(false);
+    setIsSearch(false);
+    setIsLibrary(true);
+    setIsFavourite(false);
+  },[setIsHome, setIsPlaylists, setIsSearch, setIsLibrary, setIsFavourite])
+
+  const isFavourite = useCallback(() => {
+    setIsHome(false);
+    setIsPlaylists(false);
+    setIsSearch(false);
+    setIsLibrary(false);
+    setIsFavourite(true);
+  },[setIsHome, setIsPlaylists, setIsSearch, setIsLibrary, setIsFavourite])
 
   return (
     <HeaderWrapper style={!isDeskTop ? {left: isOpen ? '0' : '-70%'} : {left: '0'}}>
@@ -32,33 +85,27 @@ const Header = () => {
         )}
           <NavigationsWrapper>
             <ul>
-              <li>
-                <Link to='/'>
-                  <RiHome4Line/>
-                  <p>Home</p>
-                </Link>
+              <li onClick={isHome}>
+                <RiHome4Line/>
+                <p>Home</p>
               </li>
-              <li>
-                <Link to='/'>
-                  <RiSearchLine/>
-                  <p>Search</p>
-                </Link>
+              <li onClick={isSearch}>
+                <RiSearchLine/>
+                <p>Search</p>
               </li>
-              <li>
-                <Link to='/'>
-                  <VscLibrary/>
-                  <p>My library</p>
-                </Link>
+              <li onClick={isLibrary}>
+                <VscLibrary/>
+                <p>My Library</p>
               </li>
             </ul>
             <ul>
-              <li>
+              <li onClick={isPlaylists}>
                 <RiAddBoxFill/>
-                <p>Create Playlists</p>
+                <p>My Playlists</p>
               </li>
-              <li>
+              <li onClick={isFavourite}>
                 <BiHeartSquare/>
-                <p>Your favorite</p>
+                <p>My Favourite</p>
               </li>
             </ul>
           </NavigationsWrapper>
