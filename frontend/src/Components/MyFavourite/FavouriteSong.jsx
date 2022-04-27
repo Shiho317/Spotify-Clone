@@ -2,7 +2,6 @@ import React, { useState, useCallback　} from 'react'
 import { FavouriteSongWrapper, SongDetails } from './FavouriteSong.style'
 import { MdMusicOff, MdMusicNote } from 'react-icons/md'
 
-
 const FavouriteSong = ({ 
   item, 
   index,

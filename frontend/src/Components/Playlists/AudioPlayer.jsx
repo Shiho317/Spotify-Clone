@@ -88,10 +88,9 @@ const AudioPlayer = ({
   const onClickFav = useCallback((id) => {
     axios.put(`https://api.spotify.com/v1/me/tracks?ids=${id}`, {
       headers: {
-        'ACCEPT': 'application/json',
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${accessToken}`
-      }
+      },
     })
     .then(res => {
       setIsFav(prev => !prev);
@@ -103,6 +102,7 @@ const AudioPlayer = ({
     })
     .catch(err => {
       console.log(err)
+      console.log('error')
     })
   },[isFavSong, accessToken]);
 
